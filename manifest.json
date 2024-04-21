@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "The Memo",
+    "version": "1.0",
+    "description": "Allows users to leave notes on web pages which are saved and displayed when the same URL is revisited.",
+    "permissions": [
+      "storage",
+      "activeTab",
+      "tabs"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "128": "icon-gray.png"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  
