@@ -19,8 +19,11 @@ function displayMemo() {
   });
 }
 
-// ページがロードされたときにメモを表示
+// ページがロードされたときにメモを表示し、フォーカスを当てる
 document.addEventListener("DOMContentLoaded", displayMemo);
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("memo").focus();
+});
 
 // メモを自動で保存するイベントリスナーを追加
 document.getElementById("memo").addEventListener("input", function () {
