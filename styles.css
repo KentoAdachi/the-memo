@@ -1,0 +1,22 @@
+h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: auto;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #666;
+    margin: auto;
+    margin-bottom: 4px;
+}
+
+textarea {
+    margin: 4px;
+}
+
+body {
+    min-width: 380px;
+}

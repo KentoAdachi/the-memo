@@ -58,3 +58,10 @@ document.getElementById("disclaimer").addEventListener("click", function () {
       "この拡張機能を使用することにより生じた損害について、作者は一切の責任を負いません。\n"
   );
 });
+
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  var currentTab = tabs[0];
+  if (currentTab) {
+    document.getElementById("url").textContent = currentTab.url;
+  }
+});
