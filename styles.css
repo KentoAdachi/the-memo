@@ -11,12 +11,17 @@ h2 {
     color: #666;
     margin: auto;
     margin-bottom: 4px;
+    display: -webkit-box;      /* ブラウザがwebkitベースの場合の必要な設定 */
+    -webkit-line-clamp: 2;     /* 表示する行数を2に制限 */
+    -webkit-box-orient: vertical; /* 要素の内容を縦方向に並べる */
+    overflow: hidden;          /* コンテンツが要素を超えた場合に非表示にする */
+    text-overflow: ellipsis;   /* コンテンツがオーバーフローした場合に省略記号を表示 */
 }
 
 textarea {
-    margin: 4px;
+    width: 98%;
 }
 
 body {
-    min-width: 380px;
+    width: 400px;
 }
