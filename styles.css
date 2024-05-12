@@ -20,6 +20,7 @@ h2 {
 
 textarea {
     width: 98%;
+    resize: none;
 }
 
 body {
