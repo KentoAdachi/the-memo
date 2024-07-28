@@ -44,8 +44,34 @@ function displayAllMemo() {
         span.style.display = "block";
         span.style.marginBottom = "10px";
         memoList.appendChild(span);
+
+        // メモを削除するボタンを作成
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "メモを削除";
+        deleteButton.style.display = "block";
+        deleteButton.style.marginBottom = "20px";
+        deleteButton.addEventListener("click", function () {
+          chrome.storage.local.remove(key, function () {
+            console.log("メモが削除されました");
+            displayAllMemo();
+          });
+        });
+        memoList.appendChild(deleteButton);
       }
     }
+
+    // すべてのメモを削除するボタンを作成
+    let deleteAllButton = document.createElement("button");
+    deleteAllButton.textContent = "すべてのメモを削除";
+    deleteAllButton.style.display = "block";
+    deleteAllButton.style.marginBottom = "20px";
+    deleteAllButton.addEventListener("click", function () {
+      chrome.storage.local.clear(function () {
+        console.log("すべてのメモが削除されました");
+        displayAllMemo();
+      });
+    });
+    memoList.appendChild(deleteAllButton);
   });
 }
 
