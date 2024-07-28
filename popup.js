@@ -11,9 +11,12 @@ function getCurrentTabUrl(callback) {
 // メモを表示する関数
 function displayMemo() {
   getCurrentTabUrl(function (url) {
-    chrome.storage.local.get(url, function (data) {
+    chrome.storage.local.get([url, "globalMemo"], function (data) {
       if (data[url]) {
         document.getElementById("memo").value = data[url];
+      }
+      if (data.globalMemo) {
+        document.getElementById("globalmemo").value = data.globalMemo;
       }
     });
   });
@@ -26,20 +29,22 @@ function displayAllMemo() {
     let memoList = document.getElementById("allmemo");
     memoList.innerHTML = "";
     for (let key in data) {
-      // URLはaタグでリンクにする
-      let a = document.createElement("a");
-      a.href = key;
-      a.textContent = key;
-      a.target = "_blank";
-      a.style.display = "block";
-      a.style.marginBottom = "5px";
-      memoList.appendChild(a);
-      // メモはspanタグで表示する
-      let span = document.createElement("span");
-      span.textContent = data[key];
-      span.style.display = "block";
-      span.style.marginBottom = "10px";
-      memoList.appendChild(span);
+      if (key !== "globalMemo") {
+        // URLはaタグでリンクにする
+        let a = document.createElement("a");
+        a.href = key;
+        a.textContent = key;
+        a.target = "_blank";
+        a.style.display = "block";
+        a.style.marginBottom = "5px";
+        memoList.appendChild(a);
+        // メモはspanタグで表示する
+        let span = document.createElement("span");
+        span.textContent = data[key];
+        span.style.display = "block";
+        span.style.marginBottom = "10px";
+        memoList.appendChild(span);
+      }
     }
   });
 }
@@ -69,6 +74,14 @@ document.getElementById("memo").addEventListener("input", function () {
     chrome.storage.local.set(saveObj, function () {
       console.log("メモが自動保存されました");
     });
+  });
+});
+
+// グローバルメモを自動で保存するイベントリスナーを追加
+document.getElementById("globalmemo").addEventListener("input", function () {
+  const globalMemo = document.getElementById("globalmemo").value;
+  chrome.storage.local.set({ globalMemo: globalMemo }, function () {
+    console.log("グローバルメモが自動保存されました");
   });
 });
 
