@@ -1,28 +1,69 @@
-h1 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin: auto;
-}
-
-h2 {
-    font-size: 14px;
-    font-weight: normal;
-    color: #666;
-    margin: auto;
-    margin-bottom: 4px;
-    display: -webkit-box;      /* ブラウザがwebkitベースの場合の必要な設定 */
-    -webkit-line-clamp: 2;     /* 表示する行数を2に制限 */
-    -webkit-box-orient: vertical; /* 要素の内容を縦方向に並べる */
-    overflow: hidden;          /* コンテンツが要素を超えた場合に非表示にする */
-    text-overflow: ellipsis;   /* コンテンツがオーバーフローした場合に省略記号を表示 */
+body {
+    width: 400px;
+    min-height: 300px; /* 最小の高さを設定して、初期状態での見た目を維持 */
+    background-color: #fffae3; /* スティッキーノート風の淡い黄色の背景 */
+    font-family: "Comic Sans MS", "Comic Sans", cursive; /* カジュアルなフォント */
+    border: 2px solid #f1c40f; /* スティッキーノートの縁に似たボーダー色 */
+    border-radius: 10px; /* 角を丸くしてスティッキーノートのように */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* 少し影を付けて奥行きを表現 */
+    padding: 10px;
+    overflow-y: auto; /* 縦方向のスクロールを許可 */
+    box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
 }
 
 textarea {
     width: 98%;
     resize: none;
+    border: 2px solid #d35400; /* テキストエリアにオレンジ色のボーダーを追加 */
+    border-radius: 5px; /* ボーダーの角も少し丸く */
+    background-color: #fffbea; /* テキストエリアも淡い黄色で背景と調和 */
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    padding: 5px;
+    overflow-y: auto; /* テキストエリア内のスクロールを許可 */
 }
 
-body {
-    width: 400px;
+textarea:focus {
+    outline: none; /* デフォルトのアウトラインを消す */
+    border-color: #e67e22; /* フォーカス時のボーダーを少し明るいオレンジ色に変更 */
+    box-shadow: 0 0 5px rgba(230, 126, 34, 0.5); /* フォーカス時のぼんやりとした影を追加 */
+}
+
+h1 {
+    color: #d35400; /* スティッキーノートに合う濃いオレンジ色 */
+    text-align: center; /* 中央寄せ */
+    margin: 0;
+    padding: 5px 0;
+    font-size: 24px;
+}
+
+h2 {
+    color: #d35400; /* スティッキーノートに合う濃いオレンジ色 */
+    text-align: left; /* 左寄せ */
+    margin: 0;
+    padding: 5px 0;
+    font-size: 16px;
+}
+
+button#toggleButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f1c40f; /* 明るい黄色の背景 */
+    color: #333; /* ダークテキストカラー */
+    border: 2px solid #e67e22; /* オレンジ色のボーダー */
+    border-radius: 5px; /* 角を少し丸く */
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 軽い影を追加 */
+    transition: background-color 0.3s ease; /* 背景色が変わるアニメーション */
+}
+
+button#toggleButton:hover {
+    background-color: #e67e22; /* ホバー時にオレンジ色に変わる */
+    color: #fff; /* テキストを白に変更 */
 }

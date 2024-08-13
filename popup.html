@@ -7,10 +7,15 @@
 </head>
 <body>
     <h1>The Memo</h1>
-    <h2><span>global</span></h2>
-    <textarea id="globalmemo" rows="10" cols="50"></textarea>
-    <h2><span id="url">url</span></h2>
-    <textarea id="memo" rows="10" cols="50"></textarea>
+    <div id="memoSection"> <!-- memoのセクション -->
+        <h2><span id="url">url</span></h2>
+        <textarea id="memo" rows="7" cols="50"></textarea>
+    </div>
+    <div id="globalMemoSection" style="display: none;"> <!-- globalmemoのセクション。最初は非表示 -->
+        <h2>Global Memo</h2>
+        <textarea id="globalmemo" rows="7" cols="50"></textarea>
+    </div>
+    <button id="toggleButton">Show Global Memo</button> <!-- トグルボタンを追加 -->
     <details>
         <summary>メモ一覧</summary>
         <div id="allmemo"></div>
@@ -20,7 +25,7 @@
         <p>この拡張機能は、chrome.storage APIを使用してブラウザのローカル領域にメモを保存します。拡張機能を削除すると、保存したデータはすべて削除されます。技術的な仕様については、<a href="https://developer.chrome.com/docs/extensions/reference/api/storage?hl=ja" target="_blank">こちら</a>を参照ください。</p>
         <p>可能な限りシンプルに実装していますが、拡張機能である性質上、完全な動作は保証できません。データベースとしての利用は推奨しません。重要な情報は保存しないでください。</p>
         <p>この拡張機能を使用することにより生じた損害について、作者は一切の責任を負いません。</p>
-      </details>      
+    </details>      
     <a href="https://github.com/KentoAdachi/chrome-memo" target="_blank">GitHub</a>
 
     <script src="popup.js"></script>

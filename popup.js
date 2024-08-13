@@ -111,6 +111,23 @@ document.getElementById("globalmemo").addEventListener("input", function () {
   });
 });
 
+// メモとグローバルメモを切り替えるためのトグルボタン
+document.getElementById("toggleButton").addEventListener("click", function () {
+  const memoSection = document.getElementById("memoSection");
+  const globalMemoSection = document.getElementById("globalMemoSection");
+  const toggleButton = document.getElementById("toggleButton");
+
+  if (memoSection.style.display === "none") {
+    memoSection.style.display = "block";
+    globalMemoSection.style.display = "none";
+    toggleButton.textContent = "Show Global Memo";
+  } else {
+    memoSection.style.display = "none";
+    globalMemoSection.style.display = "block";
+    toggleButton.textContent = "Show Memo";
+  }
+});
+
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   var currentTab = tabs[0];
   if (currentTab) {
