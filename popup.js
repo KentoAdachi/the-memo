@@ -35,21 +35,16 @@ function displayAllMemo() {
         a.href = key;
         a.textContent = key;
         a.target = "_blank";
-        a.style.display = "block";
-        a.style.marginBottom = "5px";
         memoList.appendChild(a);
+
         // メモはspanタグで表示する
         let span = document.createElement("span");
         span.textContent = data[key];
-        span.style.display = "block";
-        span.style.marginBottom = "10px";
         memoList.appendChild(span);
 
         // メモを削除するボタンを作成
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "メモを削除";
-        deleteButton.style.display = "block";
-        deleteButton.style.marginBottom = "20px";
         deleteButton.addEventListener("click", function () {
           chrome.storage.local.remove(key, function () {
             console.log("メモが削除されました");
@@ -63,8 +58,7 @@ function displayAllMemo() {
     // すべてのメモを削除するボタンを作成
     let deleteAllButton = document.createElement("button");
     deleteAllButton.textContent = "すべてのメモを削除";
-    deleteAllButton.style.display = "block";
-    deleteAllButton.style.marginBottom = "20px";
+    deleteAllButton.id = "deleteAllButton"; // IDを追加してスタイルを適用
     deleteAllButton.addEventListener("click", function () {
       chrome.storage.local.clear(function () {
         console.log("すべてのメモが削除されました");

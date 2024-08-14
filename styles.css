@@ -67,3 +67,69 @@ button#toggleButton:hover {
     background-color: #e67e22; /* ホバー時にオレンジ色に変わる */
     color: #fff; /* テキストを白に変更 */
 }
+
+/* メモ一覧のリンクのスタイル */
+#allmemo a {
+    display: block;
+    background-color: #fffbea;
+    color: #e67e22;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#allmemo a:hover {
+    background-color: #f1c40f;
+    color: #fff;
+}
+
+/* メモの内容を表示するスパン */
+#allmemo span {
+    display: block;
+    background-color: #fff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    border: 1px solid #e67e22;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 14px;
+}
+
+/* メモ削除ボタン */
+#allmemo button {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#allmemo button:hover {
+    background-color: #c0392b;
+}
+
+/* すべてのメモを削除するボタン */
+#allmemo button#deleteAllButton {
+    display: block;
+    width: 100%;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#allmemo button#deleteAllButton:hover {
+    background-color: #c0392b;
+}
