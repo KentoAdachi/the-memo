@@ -16,7 +16,7 @@ textarea {
     resize: none;
     border: 2px solid #d35400; /* テキストエリアにオレンジ色のボーダーを追加 */
     border-radius: 5px; /* ボーダーの角も少し丸く */
-    background-color: #fffbea; /* テキストエリアも淡い黄色で背景と調和 */
+    background-color: #fff; /* テキストエリアの背景色を白に変更 */
     font-family: inherit;
     font-size: 14px;
     line-height: 1.4;
@@ -72,13 +72,14 @@ button#toggleButton:hover {
 #allmemo a {
     display: block;
     background-color: #fffbea;
-    color: #e67e22;
+    color: #d35400;
     text-decoration: none;
-    padding: 8px;
+    padding: 4px;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 4px;
 }
 
 #allmemo a:hover {
@@ -93,7 +94,7 @@ button#toggleButton:hover {
     padding: 5px 8px;
     border-radius: 5px;
     border: 1px solid #e67e22;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #333;
     font-size: 14px;
 }
