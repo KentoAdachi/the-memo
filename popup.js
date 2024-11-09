@@ -128,3 +128,34 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     document.getElementById("url").textContent = currentTab.url;
   }
 });
+
+// メモを検索する関数
+function searchMemos() {
+  const searchBox = document.getElementById("searchbox");
+  const allMemoDiv = document.getElementById("allmemo");
+  const query = searchBox.value.toLowerCase();
+
+  // Storage APIからメモ一覧を取得
+  let memos = [];
+  chrome.storage.local.get(null, function (data) {
+    for (let key in data) {
+      if (key !== "globalMemo") {
+        memos.push(data[key]);
+      }
+    }
+  });
+
+  // 検索結果をフィルタリング
+  const filteredMemos = memos.filter(memo => memo.toLowerCase().includes(query));
+
+  // 検索結果を表示
+  allMemoDiv.innerHTML = "";
+  filteredMemos.forEach(memo => {
+    const memoElement = document.createElement("div");
+    memoElement.textContent = memo;
+    allMemoDiv.appendChild(memoElement);
+  });
+}
+
+// 検索ボックスの入力イベントにリスナーを追加
+document.getElementById("searchbox").addEventListener("input", searchMemos);
