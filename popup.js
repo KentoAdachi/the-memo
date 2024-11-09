@@ -42,7 +42,7 @@ function displayAllMemo() {
         span.textContent = data.memo[key];
         memoList.appendChild(span);
 
-        // メモを削除するボタンを作���
+        // メモを削除��るボタンを作成
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "メモを削除";
         deleteButton.addEventListener("click", function () {
@@ -70,7 +70,25 @@ function displayAllMemo() {
   });
 }
 
-// ペ���ジがロードされたときにメモを表示し、フォーカスを当てる
+// メモをエクスポートする関数
+function exportMemos() {
+  chrome.storage.local.get("memo", function (data) {
+    if (data.memo) {
+      const memoData = JSON.stringify(data.memo, null, 2);
+      const blob = new Blob([memoData], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "memos.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      console.log("エクスポートするメモがありません");
+    }
+  });
+}
+
+// ページがロードされたときにメモを表示し、フォーカスを当てる
 document.addEventListener("DOMContentLoaded", displayMemo);
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("memo").focus();
@@ -163,3 +181,6 @@ function searchMemos() {
 
 // 検索ボックスの入力イベントにリスナーを追加
 document.getElementById("searchbox").addEventListener("input", searchMemos);
+
+// エクスポートボタンのクリックイベントにリスナーを追加
+document.getElementById("exportButton").addEventListener("click", exportMemos);
