@@ -11,9 +11,9 @@ function getCurrentTabUrl(callback) {
 // メモを表示する関数
 function displayMemo() {
   getCurrentTabUrl(function (url) {
-    chrome.storage.local.get([url, "globalMemo"], function (data) {
-      if (data[url]) {
-        document.getElementById("memo").value = data[url];
+    chrome.storage.local.get(["memo", "globalMemo"], function (data) {
+      if (data.memo && data.memo[url]) {
+        document.getElementById("memo").value = data.memo[url];
       }
       if (data.globalMemo) {
         document.getElementById("globalmemo").value = data.globalMemo;
@@ -28,8 +28,8 @@ function displayAllMemo() {
   chrome.storage.local.get(null, function (data) {
     let memoList = document.getElementById("allmemo");
     memoList.innerHTML = "";
-    for (let key in data) {
-      if (key !== "globalMemo") {
+    if (data.memo) {
+      for (let key in data.memo) {
         // URLはaタグでリンクにする
         let a = document.createElement("a");
         a.href = key;
@@ -39,14 +39,15 @@ function displayAllMemo() {
 
         // メモはspanタグで表示する
         let span = document.createElement("span");
-        span.textContent = data[key];
+        span.textContent = data.memo[key];
         memoList.appendChild(span);
 
-        // メモを削除するボタンを作成
+        // メモを削除するボタンを作���
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "メモを削除";
         deleteButton.addEventListener("click", function () {
-          chrome.storage.local.remove(key, function () {
+          delete data.memo[key];
+          chrome.storage.local.set({ memo: data.memo }, function () {
             console.log("メモが削除されました");
             displayAllMemo();
           });
@@ -69,7 +70,7 @@ function displayAllMemo() {
   });
 }
 
-// ページがロードされたときにメモを表示し、フォーカスを当てる
+// ペ���ジがロードされたときにメモを表示し、フォーカスを当てる
 document.addEventListener("DOMContentLoaded", displayMemo);
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("memo").focus();
@@ -90,9 +91,12 @@ document.getElementById("memo").addEventListener("input", function () {
         tabId: tabid,
       });
     }
-    let saveObj = { [url]: memo };
-    chrome.storage.local.set(saveObj, function () {
-      console.log("メモが自動保存されました");
+    chrome.storage.local.get("memo", function (data) {
+      let memoData = data.memo || {};
+      memoData[url] = memo;
+      chrome.storage.local.set({ memo: memoData }, function () {
+        console.log("メモが自動保存されました");
+      });
     });
   });
 });
@@ -137,23 +141,23 @@ function searchMemos() {
 
   // Storage APIからメモ一覧を取得
   let memos = [];
-  chrome.storage.local.get(null, function (data) {
-    for (let key in data) {
-      if (key !== "globalMemo") {
-        memos.push(data[key]);
+  chrome.storage.local.get("memo", function (data) {
+    if (data.memo) {
+      for (let key in data.memo) {
+        memos.push(data.memo[key]);
       }
     }
-  });
 
-  // 検索結果をフィルタリング
-  const filteredMemos = memos.filter(memo => memo.toLowerCase().includes(query));
+    // 検索結果をフィルタリング
+    const filteredMemos = memos.filter(memo => memo.toLowerCase().includes(query));
 
-  // 検索結果を表示
-  allMemoDiv.innerHTML = "";
-  filteredMemos.forEach(memo => {
-    const memoElement = document.createElement("div");
-    memoElement.textContent = memo;
-    allMemoDiv.appendChild(memoElement);
+    // 検索結果を表示
+    allMemoDiv.innerHTML = "";
+    filteredMemos.forEach(memo => {
+      const memoElement = document.createElement("div");
+      memoElement.textContent = memo;
+      allMemoDiv.appendChild(memoElement);
+    });
   });
 }
 
