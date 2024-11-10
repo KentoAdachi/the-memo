@@ -142,7 +142,6 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 // メモを検索する関数
 function searchMemos() {
   const searchBox = document.getElementById("searchbox");
-  const allMemoDiv = document.getElementById("allmemo");
   const query = searchBox.value.toLowerCase();
 
   // Storage APIからメモ一覧を取得
