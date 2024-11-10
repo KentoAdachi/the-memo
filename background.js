@@ -23,10 +23,10 @@ function getActiveTab() {
 
 function checkMemoForTab(tab, sendResponse) {
   const url = tab.url;
-  chrome.storage.local.get(url, function (data) {
-    const iconPath = data[url] ? "icon.png" : "icon-gray.png";
+  chrome.storage.local.get(null, function (data) {
+    const iconPath = data.memo[url] ? "icon.png" : "icon-gray.png";
     updateIcon(tab.id, iconPath);
-    sendResponse({ result: data[url] || "" });
+    sendResponse({ result: data.memo[url] || "" });
   });
 }
 
