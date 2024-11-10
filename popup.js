@@ -156,26 +156,18 @@ function searchMemos() {
   const query = searchBox.value.toLowerCase();
 
   // Storage APIからメモ一覧を取得
-  let memos = [];
   chrome.storage.local.get("memo", function (data) {
-    if (data.memo) {
-      for (let key in data.memo) {
-        memos.push(data.memo[key]);
+    // メモをsearchBoxの値でフィルタリング
+    let filteredMemos = {};
+    for (let key in data.memo) {
+      if (
+        key.toLowerCase().includes(query) ||
+        data.memo[key].toLowerCase().includes(query)
+      ) {
+        filteredMemos[key] = data.memo[key];
       }
     }
-
-    // 検索結果をフィルタリング
-    const filteredMemos = memos.filter((memo) =>
-      memo.toLowerCase().includes(query)
-    );
-
-    // 検索結果を表示
-    allMemoDiv.innerHTML = "";
-    filteredMemos.forEach((memo) => {
-      const memoElement = document.createElement("div");
-      memoElement.textContent = memo;
-      allMemoDiv.appendChild(memoElement);
-    });
+    displayAllMemo(filteredMemos);
   });
 }
 
