@@ -11,7 +11,7 @@ body {
     box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
 }
 
-textarea {
+#memo, #globalmemo {
     width: 98%;
     resize: none;
     border: 2px solid #d35400; /* テキストエリアにオレンジ色のボーダーを追加 */
@@ -25,10 +25,31 @@ textarea {
     overflow-y: auto; /* テキストエリア内のスクロールを許可 */
 }
 
-textarea:focus {
+#memo:focus, #globalmemo:focus {
     outline: none; /* デフォルトのアウトラインを消す */
     border-color: #e67e22; /* フォーカス時のボーダーを少し明るいオレンジ色に変更 */
     box-shadow: 0 0 5px rgba(230, 126, 34, 0.5); /* フォーカス時のぼんやりとした影を追加 */
+}
+
+#searchbox {
+    width: 98%;
+    height: 20px;
+    resize: none;
+    border: 2px solid #d35400;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    padding: 5px;
+    overflow-y: auto;
+}
+
+#searchbox:focus {
+    outline: none;
+    border-color: #e67e22;
+    box-shadow: 0 0 5px rgba(230, 126, 34, 0.5);
 }
 
 h1 {
@@ -90,10 +111,10 @@ button#toggleButton:hover {
 /* メモの内容を表示するスパン */
 #allmemo span {
     display: block;
-    background-color: #fff;
+    background-color: #fffae3;
     padding: 5px 8px;
     border-radius: 5px;
-    border: 1px solid #e67e22;
+    border: 1px solid #f1c40f;
     margin-bottom: 8px;
     color: #333;
     font-size: 14px;
