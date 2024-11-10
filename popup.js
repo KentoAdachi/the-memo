@@ -95,24 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // メモを自動で保存するイベントリスナーを追加
 document.getElementById("memo").addEventListener("input", function () {
   const memo = document.getElementById("memo").value;
-  getCurrentTabUrl(function (url, tabid) {
-    if (memo != "") {
-      chrome.action.setIcon({
-        path: "icon.png",
-        tabId: tabid,
-      });
-    } else {
-      chrome.action.setIcon({
-        path: "icon-gray.png",
-        tabId: tabid,
-      });
-    }
+  getCurrentTabUrl(function (url) {
     chrome.storage.local.get("memo", function (data) {
       let memoData = data.memo || {};
       memoData[url] = memo;
       chrome.storage.local.set({ memo: memoData }, function () {
         console.log("メモが自動保存されました");
       });
+      displayAllMemo(memoData);
     });
   });
 });
