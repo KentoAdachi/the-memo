@@ -42,7 +42,7 @@ function displayAllMemo() {
         span.textContent = data.memo[key];
         memoList.appendChild(span);
 
-        // メモを削除��るボタンを作成
+        // メモを削除するボタンを作成
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "メモを削除";
         deleteButton.addEventListener("click", function () {
@@ -167,11 +167,13 @@ function searchMemos() {
     }
 
     // 検索結果をフィルタリング
-    const filteredMemos = memos.filter(memo => memo.toLowerCase().includes(query));
+    const filteredMemos = memos.filter((memo) =>
+      memo.toLowerCase().includes(query)
+    );
 
     // 検索結果を表示
     allMemoDiv.innerHTML = "";
-    filteredMemos.forEach(memo => {
+    filteredMemos.forEach((memo) => {
       const memoElement = document.createElement("div");
       memoElement.textContent = memo;
       allMemoDiv.appendChild(memoElement);
