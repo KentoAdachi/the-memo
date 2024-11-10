@@ -98,7 +98,11 @@ document.getElementById("memo").addEventListener("input", function () {
   getCurrentTabUrl(function (url) {
     chrome.storage.local.get("memo", function (data) {
       let memoData = data.memo || {};
-      memoData[url] = memo;
+      if (memo === "") {
+        delete memoData[url];
+      } else {
+        memoData[url] = memo;
+      }
       chrome.storage.local.set({ memo: memoData }, function () {
         console.log("メモが自動保存されました");
       });
