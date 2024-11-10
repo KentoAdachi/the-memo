@@ -48,7 +48,7 @@ function displayAllMemo(memos) {
         delete memos[key];
         chrome.storage.local.set({ memo: memos }, function () {
           console.log("メモが削除されました");
-          displayAllMemo();
+          displayAllMemo(memos);
         });
       });
       memoList.appendChild(deleteButton);
