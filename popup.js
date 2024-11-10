@@ -18,56 +18,54 @@ function displayMemo() {
       if (data.globalMemo) {
         document.getElementById("globalmemo").value = data.globalMemo;
       }
-      displayAllMemo();
+      displayAllMemo(data.memo);
     });
   });
 }
 
 // すべてのメモを表示する関数
-function displayAllMemo() {
-  chrome.storage.local.get(null, function (data) {
-    let memoList = document.getElementById("allmemo");
-    memoList.innerHTML = "";
-    if (data.memo) {
-      for (let key in data.memo) {
-        // URLはaタグでリンクにする
-        let a = document.createElement("a");
-        a.href = key;
-        a.textContent = key;
-        a.target = "_blank";
-        memoList.appendChild(a);
+function displayAllMemo(memos) {
+  let memoList = document.getElementById("allmemo");
+  memoList.innerHTML = "";
+  if (memos) {
+    for (let key in memos) {
+      // URLはaタグでリンクにする
+      let a = document.createElement("a");
+      a.href = key;
+      a.textContent = key;
+      a.target = "_blank";
+      memoList.appendChild(a);
 
-        // メモはspanタグで表示する
-        let span = document.createElement("span");
-        span.textContent = data.memo[key];
-        memoList.appendChild(span);
+      // メモはspanタグで表示する
+      let span = document.createElement("span");
+      span.textContent = memos[key];
+      memoList.appendChild(span);
 
-        // メモを削除するボタンを作成
-        let deleteButton = document.createElement("button");
-        deleteButton.textContent = "メモを削除";
-        deleteButton.addEventListener("click", function () {
-          delete data.memo[key];
-          chrome.storage.local.set({ memo: data.memo }, function () {
-            console.log("メモが削除されました");
-            displayAllMemo();
-          });
+      // メモを削除するボタンを作成
+      let deleteButton = document.createElement("button");
+      deleteButton.textContent = "メモを削除";
+      deleteButton.addEventListener("click", function () {
+        delete memos[key];
+        chrome.storage.local.set({ memo: memos }, function () {
+          console.log("メモが削除されました");
+          displayAllMemo();
         });
-        memoList.appendChild(deleteButton);
-      }
-    }
-
-    // すべてのメモを削除するボタンを作成
-    let deleteAllButton = document.createElement("button");
-    deleteAllButton.textContent = "すべてのメモを削除";
-    deleteAllButton.id = "deleteAllButton"; // IDを追加してスタイルを適用
-    deleteAllButton.addEventListener("click", function () {
-      chrome.storage.local.clear(function () {
-        console.log("すべてのメモが削除されました");
-        displayAllMemo();
       });
+      memoList.appendChild(deleteButton);
+    }
+  }
+
+  // すべてのメモを削除するボタンを作成
+  let deleteAllButton = document.createElement("button");
+  deleteAllButton.textContent = "すべてのメモを削除";
+  deleteAllButton.id = "deleteAllButton"; // IDを追加してスタイルを適用
+  deleteAllButton.addEventListener("click", function () {
+    chrome.storage.local.clear(function () {
+      console.log("すべてのメモが削除されました");
+      displayAllMemo();
     });
-    memoList.appendChild(deleteAllButton);
   });
+  memoList.appendChild(deleteAllButton);
 }
 
 // メモをエクスポートする関数
