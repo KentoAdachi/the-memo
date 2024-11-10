@@ -18,9 +18,9 @@ function displayMemo() {
       if (data.globalMemo) {
         document.getElementById("globalmemo").value = data.globalMemo;
       }
+      displayAllMemo();
     });
   });
-  displayAllMemo();
 }
 
 // すべてのメモを表示する関数
