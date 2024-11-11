@@ -13,7 +13,7 @@ function displayMemo() {
   getCurrentTabUrl(function (url) {
     chrome.storage.local.get(["memo", "globalMemo"], function (data) {
       if (data.memo && data.memo[url]) {
-        document.getElementById("memo").value = data.memo[url];
+        document.getElementById("memo").value = data.memo[url].text;
       }
       if (data.globalMemo) {
         document.getElementById("globalmemo").value = data.globalMemo;
@@ -38,8 +38,15 @@ function displayAllMemo(memos) {
 
       // メモはspanタグで表示する
       let span = document.createElement("span");
-      span.textContent = memos[key];
+      span.textContent = memos[key].text;
       memoList.appendChild(span);
+
+      // 編集日を表示する
+      let dateSpan = document.createElement("span");
+      dateSpan.textContent = ` (Last edited: ${new Date(
+        memos[key].date
+      ).toLocaleString()})`;
+      memoList.appendChild(dateSpan);
 
       // メモを削除するボタンを作成
       let deleteButton = document.createElement("button");
@@ -101,7 +108,7 @@ document.getElementById("memo").addEventListener("input", function () {
       if (memo === "") {
         delete memoData[url];
       } else {
-        memoData[url] = memo;
+        memoData[url] = { text: memo, date: new Date().toISOString() };
       }
       chrome.storage.local.set({ memo: memoData }, function () {
         console.log("メモが自動保存されました");
@@ -155,7 +162,7 @@ function searchMemos() {
     for (let key in data.memo) {
       if (
         key.toLowerCase().includes(query) ||
-        data.memo[key].toLowerCase().includes(query)
+        data.memo[key].text.toLowerCase().includes(query)
       ) {
         filteredMemos[key] = data.memo[key];
       }
