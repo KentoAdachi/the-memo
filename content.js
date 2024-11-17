@@ -1,4 +1,3 @@
-console.log("Content script loaded.");
 function checkMemo() {
   chrome.runtime.sendMessage({ action: "checkMemo" });
 }
