@@ -13,7 +13,7 @@ body {
 
 #memo, #globalmemo {
     width: 98%;
-    resize: none;
+    resize: block;
     border: 2px solid #d35400; /* テキストエリアにオレンジ色のボーダーを追加 */
     border-radius: 5px; /* ボーダーの角も少し丸く */
     background-color: #fff; /* テキストエリアの背景色を白に変更 */
