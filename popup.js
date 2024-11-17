@@ -39,13 +39,17 @@ function displayAllMemo(memos) {
       // メモはspanタグで表示する
       let span = document.createElement("span");
       span.textContent = memos[key].text;
+      // idを追加してスタイルを適用
+      span.id = "memoelement";
       memoList.appendChild(span);
 
       // 編集日を表示する
-      let dateSpan = document.createElement("span");
+      let dateSpan = document.createElement("div");
       dateSpan.textContent = ` (Last edited: ${new Date(
         memos[key].date
       ).toLocaleString()})`;
+      // idを追加してスタイルを適用
+      dateSpan.id = "date";
       memoList.appendChild(dateSpan);
 
       // メモを削除するボタンを作成
