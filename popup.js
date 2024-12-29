@@ -71,6 +71,10 @@ function displayAllMemo(memos) {
     }
   }
 
+  // アイテムの区切り線を追加
+  let hr = document.createElement("hr");
+  memoList.appendChild(hr);
+
   // すべてのメモを削除するボタンを作成
   let deleteAllButton = document.createElement("button");
   deleteAllButton.textContent = "すべてのメモを削除";
