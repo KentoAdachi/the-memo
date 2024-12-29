@@ -2,15 +2,16 @@
 function getCurrentTabUrl(callback) {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const url = tabs[0].url;
+    const title = tabs[0].title; // タイトルを取得
     console.log(url);
 
-    callback(url, tabs[0].id);
+    callback(url, title, tabs[0].id); // タイトルをコールバックに渡す
   });
 }
 
 // メモを表示する関数
 function displayMemo() {
-  getCurrentTabUrl(function (url) {
+  getCurrentTabUrl(function (url, title) {
     chrome.storage.local.get(["memo", "globalMemo"], function (data) {
       if (data.memo && data.memo[url]) {
         document.getElementById("memo").value = data.memo[url].text;
@@ -43,9 +44,9 @@ function displayAllMemo(memos) {
       span.id = "memoelement";
       memoList.appendChild(span);
 
-      // 編集日を表示する
+      // タイトルと編集日を表示する
       let dateSpan = document.createElement("div");
-      dateSpan.textContent = ` (Last edited: ${new Date(
+      dateSpan.textContent = `${memos[key].title} (Last edited: ${new Date(
         memos[key].date
       ).toLocaleString()})`;
       // idを追加してスタイルを適用
@@ -106,13 +107,17 @@ document.addEventListener("DOMContentLoaded", function () {
 // メモを自動で保存するイベントリスナーを追加
 document.getElementById("memo").addEventListener("input", function () {
   const memo = document.getElementById("memo").value;
-  getCurrentTabUrl(function (url) {
+  getCurrentTabUrl(function (url, title) {
     chrome.storage.local.get("memo", function (data) {
       let memoData = data.memo || {};
       if (memo === "") {
         delete memoData[url];
       } else {
-        memoData[url] = { text: memo, date: new Date().toISOString() };
+        memoData[url] = {
+          text: memo,
+          title: title,
+          date: new Date().toISOString(),
+        }; // タイトルを保存
       }
       chrome.storage.local.set({ memo: memoData }, function () {
         console.log("メモが自動保存されました");
@@ -151,6 +156,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   var currentTab = tabs[0];
   if (currentTab) {
     document.getElementById("url").textContent = currentTab.url;
+    document.getElementById("title").textContent = currentTab.title; // タイトルを表示
   }
 });
 
