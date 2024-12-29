@@ -167,7 +167,7 @@ button#toggleButton:hover {
     word-break: break-all;
     display: -webkit-box;
     -webkit-box-orient:block-axis;
-    line-clamp: 2;
+    -webkit-line-clamp: 2;
     overflow:hidden;
 }
 
