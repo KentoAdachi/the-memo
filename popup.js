@@ -30,6 +30,10 @@ function displayAllMemo(memos) {
   memoList.innerHTML = "";
   if (memos) {
     for (let key in memos) {
+      // アイテムの区切り線を追加
+      let hr = document.createElement("hr");
+      memoList.appendChild(hr);
+
       // URLはaタグでリンクにする
       let a = document.createElement("a");
       a.href = key;
