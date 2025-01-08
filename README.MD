@@ -26,4 +26,4 @@ https://chromewebstore.google.com/detail/the-memo/lhkkklfkaoifbinakklcgdpnhgombg
 
 </div>
 
-- 拡張機能にショートカットを割り当てると素早くメモを残すことができます。(chrome://extensions/shortcuts)
+- 拡張機能にショートカットを割り当てると素早くメモを残すことができます。ctrl+mあたりがおすすめ(chrome://extensions/shortcuts)
