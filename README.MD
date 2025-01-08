@@ -1,3 +1,7 @@
+## 更新情報
+2025/1/8 Chrome Web Store にリリースしました！　以下のリンクからダウンロードできます。
+https://chromewebstore.google.com/detail/the-memo/lhkkklfkaoifbinakklcgdpnhgombgdk
+
 ## 概要
 
 ![sceenshot](./screenshot.png)
