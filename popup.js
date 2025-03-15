@@ -29,7 +29,13 @@ function displayAllMemo(memos) {
   let memoList = document.getElementById("allmemo");
   memoList.innerHTML = "";
   if (memos) {
-    for (let key in memos) {
+    // Extract and sort keys based on the date
+    const sortedKeys = Object.keys(memos).sort((a, b) => {
+      return new Date(memos[b].date) - new Date(memos[a].date);
+    });
+
+    // Iterate over sorted keys to display memos
+    sortedKeys.forEach((key) => {
       // アイテムの区切り線を追加
       let hr = document.createElement("hr");
       memoList.appendChild(hr);
@@ -68,7 +74,7 @@ function displayAllMemo(memos) {
         });
       });
       memoList.appendChild(deleteButton);
-    }
+    });
   }
 
   // アイテムの区切り線を追加
