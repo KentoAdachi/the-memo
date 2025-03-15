@@ -1,3 +1,7 @@
+## 更新情報
+2025/1/8 Chrome Web Store にリリースしました！　以下のリンクからダウンロードできます。
+https://chromewebstore.google.com/detail/the-memo/lhkkklfkaoifbinakklcgdpnhgombgdk
+
 ## 概要
 
 ![sceenshot](./screenshot.png)
@@ -22,4 +26,4 @@
 
 </div>
 
-- 拡張機能にショートカットを割り当てると素早くメモを残すことができます。(chrome://extensions/shortcuts)
+- 拡張機能にショートカットを割り当てると素早くメモを残すことができます。ctrl+mあたりがおすすめ(chrome://extensions/shortcuts)
