@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "The Memo",
     "version": "1.1.0",
-    "description": "Allows users to leave notes on web pages which are saved and displayed when the same URL is revisited.",
+    "description": "Allows users to leave notes by URL quickly and easily.",
     "permissions": [
       "storage",
       "activeTab",
